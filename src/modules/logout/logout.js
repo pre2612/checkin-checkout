@@ -15,6 +15,7 @@
 
         logout: function(event) {
             event.preventDefault();
+
             firebaseRef.unauth();
             checkin.ContentShowHide.hide();
             checkin.LoginModal.show();

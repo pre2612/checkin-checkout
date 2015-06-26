@@ -1,11 +1,20 @@
 body {
   background: $light-grey;
   color: $dark-gray;
+
+  .wrapper {
+    position: relative;
+  }
+
 }
 
 #my-tab-content {
   padding-top: 30px;
   display: none;
+}
+
+#logout {
+
 }
 
 
