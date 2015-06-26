@@ -1,0 +1,22 @@
+.modal-content {
+  background-color: $light-grey;
+
+  input {
+    width: 100%;
+  }
+}
+
+
+#check-in {
+  text-align: center
+}
+
+.table {
+  > tbody
+  > tr {
+    > th,
+    > td {
+      padding: 15px 0;
+    }
+  }
+}

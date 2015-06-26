@@ -1,0 +1,8 @@
+.btn-info {
+  background-color: $purple;
+  border-color: $purple;
+  &:focus, &:active, &:hover {
+    background-color: $purple;
+    border-color: $purple;
+  }
+}
