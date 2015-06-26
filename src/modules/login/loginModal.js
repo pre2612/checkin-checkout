@@ -5,7 +5,6 @@
             this.$elem = $(elem);
             this.$emailVal = this.$elem.find("#login-email");
             this.$pwd = this.$elem.find("#login-password");
-            this.show();
         },
 
         show: function() {

@@ -6,3 +6,14 @@
     border-color: $purple;
   }
 }
+
+
+button {
+  &.logout-btn {
+    position: absolute;
+    right: 20px;
+    z-index: 10;
+    background: transparent;
+    i.fa {font-size: 30px; color: $green;}
+  }
+}

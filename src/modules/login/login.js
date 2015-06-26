@@ -7,6 +7,7 @@
         init: function(elem) {
             this.$elem = $(elem),
             this.setup();
+            this.ifAuth();
         },
 
         setup: function() {
@@ -15,9 +16,10 @@
 
         loginClick: function(event) {
             event.preventDefault();
-            checkin.Login.checkAuth(checkin.LoginModal.getEmailVal(),checkin.LoginModal.getpwd());
+            checkin.Login.checkCredentails(checkin.LoginModal.getEmailVal(),checkin.LoginModal.getpwd());
         },
-        checkAuth: function(email , password) {
+
+        checkCredentails: function(email , password) {
             firebaseRef.authWithPassword({
                 email    : email,
                 password : password
@@ -25,13 +27,22 @@
                 error ? console.log("Login Failed!", error) : checkin.Login.showContent();
             });
         },
+
         showContent : function(){
             checkin.ContentShowHide.show();
             checkin.LoginModal.hide();
+        },
+
+        checkIfAuth: function(authData) {
+            authData ? checkin.Login.showContent() : checkin.LoginModal.show();
+        },
+
+        ifAuth: function() {
+            firebaseRef.onAuth(this.checkIfAuth);
         }
     };
 
-    // Initialize div
+    // Initialize Login div
     $( document ).ready(function() {
         checkin.Login.init('#login');
     });
