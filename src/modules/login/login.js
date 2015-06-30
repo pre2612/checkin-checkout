@@ -1,50 +1,56 @@
-/**
- * Created by pborrawar on 6/24/15.
- */
-(function($, checkin){
+"use strict";
+(function ($, checkin) {
 
     checkin.Login = {
-        init: function(elem) {
-            this.$elem = $(elem),
+        init: function (elem) {
+            this.$elem = $(elem);
             this.setup();
             this.ifAuth();
         },
 
-        setup: function() {
+        setup: function () {
             this.$elem.click(checkin.Login.loginClick);
         },
-
-        loginClick: function(event) {
+        // Login click event
+        loginClick: function (event) {
             event.preventDefault();
-            checkin.Login.checkCredentails(checkin.LoginModal.getEmailVal(),checkin.LoginModal.getpwd());
+            checkin.Login.checkCredentails(checkin.LoginModal.getEmailVal(), checkin.LoginModal.getpwd());
         },
-
-        checkCredentails: function(email , password) {
+        // Check credentials if right show main content or console error msg
+        checkCredentails: function (email, password) {
             firebaseRef.authWithPassword({
                 email    : email,
                 password : password
-            }, function(error, authData) {
-                error ? console.log("Login Failed!", error) : checkin.Login.showContent();
+            }, function (error) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    checkin.Login.showContent();
+                }
             });
         },
-
-        showContent : function(){
+        // Show Content and Hide Login Modal
+        showContent : function () {
             checkin.ContentShowHide.show();
             checkin.LoginModal.hide();
         },
-
-        checkIfAuth: function(authData) {
-            authData ? checkin.Login.showContent() : checkin.LoginModal.show();
+        // Check if user is authenticated
+        checkIfAuth: function (authData) {
+            if (authData) {
+                checkin.Login.showContent();
+            } else {
+                checkin.LoginModal.show();
+            }
         },
-
-        ifAuth: function() {
+        // Callback to fire on auth
+        ifAuth: function () {
             firebaseRef.onAuth(this.checkIfAuth);
         }
     };
 
-    // Initialize Login div
-    $( document ).ready(function() {
-        checkin.Login.init('#login');
+    // Initialize Login div with DOM element when DOM is ready
+    $(function () {
+        checkin.Login.init("#login");
     });
 
-})(jQuery, CheckIn);
+}(jQuery, CheckIn));

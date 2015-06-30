@@ -1,15 +1,16 @@
-/**
- * Created by pborrawar on 6/24/15.
- */
-//global variables
-var firebaseRef  = new Firebase('https://checkin-checkout.firebaseio.com/'),
-    myTabs       = $('#appTabs a'),
-    CheckIn      = CheckIn || {};
-    CheckIn.data = CheckIn.data || {};
+/*jslint browser: true */
+/*global CheckIn: true, jQuery: true, $: true, Firebase: true, Handlebars: true */
 
-//tabs click event
+"use strict";
+
+//single var pattern
+var firebaseRef = new Firebase("https://checkin-checkout.firebaseio.com/"), //Define firebase global variable to access
+    myTabs = $("#appTabs a"), // Tabs Element
+    CheckIn = CheckIn || {}; //Global namespace for Entire app
+
+//tabs click event to switch between tabs
 myTabs.click(function (e) {
     e.preventDefault();
-    $(this).tab('show');
+    $(this).tab("show");
 });
 

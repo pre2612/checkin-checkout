@@ -1,26 +1,25 @@
-/**
- * Created by pborrawar on 6/24/15.
- */
-(function($, checkin){
-
+"use strict";
+(function ($, checkin) {
 
     checkin.ContentShowHide = {
-        init: function(elem) {
+        init: function (elem) {
             this.$elem = $(elem);
+            //On Initial Load Hide Main content
             this.hide();
         },
-
-        show: function() {
+        // Show Main Content
+        show: function () {
             this.$elem.fadeIn();
         },
-        hide: function() {
+        // Hide main content
+        hide: function () {
             this.$elem.fadeOut();
         }
     };
 
-    // Initialize div
-    $( document ).ready(function() {
-        checkin.ContentShowHide.init('#my-tab-content');
+    // Initialize Main Content Area div with DOM element when DOM is ready
+    $(function () {
+        checkin.ContentShowHide.init("#my-tab-content");
     });
 
-})(jQuery, CheckIn);
+}(jQuery, CheckIn));

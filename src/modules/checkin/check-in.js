@@ -1,39 +1,39 @@
-/**
- * Created by pborrawar on 6/24/15.
- */
+/*jslint browser: true */
+/*global CheckIn: true, jQuery: true, $: true, Firebase: true, firebaseRef: true */
+"use strict";
 
-(function($, checkin){
+(function ($, checkin) {
 
     checkin.CheckIn = {
-        init: function(elem) {
-            this.$elem = $(elem),
-            this.$name = this.$elem.find("#name"),
-            this.$device = this.$elem.find("#device"),
-            this.$checkIn = this.$elem.find("#checkin-click"),
-            $checkOutTab = $("#checkout-tab"),
-            d = new Date(),
+        init: function (elem) {
+            this.$elem = $(elem);
+            this.$name = this.$elem.find("#name");
+            this.$device = this.$elem.find("#device");
+            this.$checkIn = this.$elem.find("#checkin-click");
             this.setup();
         },
-
-        setup: function() {
+        //set Check-In click event
+        setup: function () {
             this.$checkIn.click(checkin.CheckIn.checkInClick);
         },
-
-        getName: function() {
+        // Get Name of the Person of the Input with id "name"
+        getName: function () {
             return this.$name.val();
         },
-
-        getDevice: function() {
+        // Get Device name of the Input with id "device"
+        getDevice: function () {
             return this.$device.val();
         },
-
-        checkInClick: function(event) {
+        // Click event for check-in btn to push data to firebase with today's date
+        checkInClick: function (event) {
             event.preventDefault();
+            var $checkOutTab = $("#checkout-tab"),
+                d = new Date(); // get todays Date
 
             firebaseRef.child("check-in").push({
                 name: checkin.CheckIn.getName(),
                 device: checkin.CheckIn.getDevice(),
-                time: d.getDate()+"/"+ d.getMonth()+"/"+ d.getFullYear()
+                time: d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear()
             });
 
             $checkOutTab.tab("show");
@@ -41,8 +41,9 @@
         }
     };
 
-    $( document ).ready(function() {
-        checkin.CheckIn.init('#check-in');
+    // Initialize check-in div with DOM element when DOM is ready
+    $(function () {
+        checkin.CheckIn.init("#check-in");
     });
 
-})(jQuery, CheckIn);
+}(jQuery, CheckIn));

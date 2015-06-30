@@ -1,20 +1,17 @@
-/**
- * Created by pborrawar on 6/26/15.
- */
-
-(function($, checkin){
+"use strict";
+(function ($, checkin) {
 
     checkin.Typeahaed = {
-        init: function(elem,arr) {
+        init: function (elem, arr) {
             this.$typeAhead = $(elem);
             this.setup(arr);
         },
 
-        setup: function(arr) {
+        setup: function (arr) {
             this.setAutoComplete(arr);
         },
-
-        setAutoComplete: function(arr) {
+        // Typeahead set with options
+        setAutoComplete: function (arr) {
             this.$typeAhead.typeahead(
                 {
                     hint: true,
@@ -22,19 +19,19 @@
                     minLength: 1
                 },
                 {
-                    name: 'names',
-                    displayKey: 'value',
-                    source: checkin.Typeahaed._autoCompleteSearch(arr)
+                    name: "names",
+                    displayKey: "value",
+                    source: checkin.Typeahaed.autoCompleteSearch(arr)
                 }
             );
         },
-        _autoCompleteSearch: function(strings) {
+        autoCompleteSearch: function (strings) {
             return function findMatches(q, cb) {
                 var matches = [],
 
                     substrRegex = new RegExp(q, 'i');
 
-                $.each(strings, function(i, str) {
+                $.each(strings, function (i, str) {
                     if (substrRegex.test(str)) {
                         matches.push({ value: str });
                     }
@@ -43,17 +40,18 @@
                 cb(matches);
             };
         },
-        clearInput: function() {
-            $(':input').val('');
+        // Clear Typeahead Input
+        clearInput: function () {
+            $(":input").val('');
         }
     };
-
-    $( document ).ready(function() {
-        setTimeout(function(){
-            checkin.Typeahaed.init('#device' , checkin.GetContent.getDevices());
-            checkin.Typeahaed.init('#name' , checkin.GetContent.getNames());
+    // Initialize typeahaed for name and device elements and pass corresponding name, device arrays to it
+    $(function () {
+        setTimeout(function () {
+            checkin.Typeahaed.init("#device", checkin.GetContent.getDevices());
+            checkin.Typeahaed.init("#name", checkin.GetContent.getNames());
         }, 500);
 
     });
 
-})(jQuery, CheckIn);
+}(jQuery, CheckIn));

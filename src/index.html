@@ -1,5 +1,4 @@
-<html>
-
+<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
@@ -12,98 +11,105 @@
 </head>
 
 <body>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
+    <div class="container-fluid wrapper">
+        <!-- Sign Out of app -->
+        <button id="logout" class="btn pull-right logout-btn"><i class="fa fa-sign-out"></i></button>
+        <div class="row">
+            <div class="col-lg-12">
 
+                <!--Tabs to switch between Checking In and Out -->
+                <ul id="appTabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active"><a href="#check-in-tab" class="text-center">Check-In</a></li>
+                    <li><a href="#check-out-tab" class="text-center" id="checkout-tab">Check-Out</a></li>
+                </ul>
 
-<div class="container-fluid wrapper">
-    <button id="logout" class="btn pull-right logout-btn"><i class="fa fa-sign-out"></i></button>
-    <div class="row">
-        <div class="col-lg-12">
-            <ul id="appTabs" class="nav nav-tabs" data-tabs="tabs">
-                <li class="active"><a href="#check-in-tab" class="text-center">Check-In</a></li>
-                <li><a href="#check-out-tab" class="text-center" id="checkout-tab">Check-Out</a></li>
-            </ul>
-            <div id="my-tab-content" class="tab-content">
-                <div class="tab-pane active" id="check-in-tab">
-                    <form role="form" id="check-in">
-                        <div class="form-group">
-                            <input type="text" class="form-control typeahead" id="name" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="device" placeholder="Device">
-                        </div>
-                        <button type="submit" class="btn btn-info text-center" id="checkin-click">Check-In</button>
-                    </form>
-                </div>
-                <div class="tab-pane" id="check-out-tab">
-                    <table class="table" id="check-out">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th class="hidden-xs hidden-sm">Device</th>
-                            <th class="hidden-xs hidden-sm">Time</th>
-                            <th>Check-Out</th>
-                        </tr>
-                        </thead>
-                        <script id="some-template" type="text/x-handlebars-template">
-                            {{#each check-in}}
-                            <tr>
-                                <td>{{this.name}}</td>
-                                <td class="hidden-xs hidden-sm">{{this.device}}</td>
-                                <td class="hidden-xs hidden-sm">{{this.time}}</td>
-                                <td><button class="btn btn-info text-center checkout-click" id="{{@key}}">Check-Out</button></td>
-                            </tr>
-                            {{/each}}
-                        </script>
-                        <tbody id="checkIn-list">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="main-content">
-
-    </div>
-</div>
-
-<div id="loginModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close btn-info" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Login!</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form role="form">
+                <!--Check In Tab to Check In device with name and device name -->
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="check-in-tab">
+                        <form role="form" id="check-in">
                             <div class="form-group">
-                                <label for="name">Email</label><br />
-                                <input type="text" name="email" id="login-email" class="text ui-widget-content ui-corner-all" />
+                                <input type="text" class="form-control typeahead" id="name" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label><br />
-                                <input type="password" name="password" id="login-password" value="" class="text ui-widget-content ui-corner-all" />
+                                <input type="text" class="form-control" id="device" placeholder="Device">
                             </div>
+                            <button type="submit" class="btn btn-info text-center" id="checkin-click">Check-In</button>
                         </form>
                     </div>
+
+                    <!-- Check Out Tab to check out devices -->
+                    <div class="tab-pane" id="check-out-tab">
+                        <table class="table" id="check-out">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th class="hidden-xs hidden-sm">Device</th>
+                                <th class="hidden-xs hidden-sm">Time</th>
+                                <th>Check-Out</th>
+                            </tr>
+                            </thead>
+
+                            <!--handlebar template to loop through Checked In List -->
+                            <script id="some-template" type="text/x-handlebars-template">
+                                {{#each check-in}}
+                                <tr>
+                                    <td>{{this.name}}</td>
+                                    <td class="hidden-xs hidden-sm">{{this.device}}</td>
+                                    <td class="hidden-xs hidden-sm">{{this.time}}</td>
+                                    <td><button class="btn btn-info text-center checkout-click" id="{{@key}}">Check-Out</button></td>
+                                </tr>
+                                {{/each}}
+                            </script>
+
+                            <!-- Element where handlebar code will be injected -->
+                            <tbody id="checkIn-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
-            <div class="modal-footer">
-                <button id="login" class="btn btn-info">Login</button>
-            </div>
         </div>
-
     </div>
-</div>
+
+    <!-- Initial Login Modal for Email andd pwd -->
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close btn-info" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login!</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="name">Email</label><br />
+                                    <input type="text" name="email" id="login-email" class="text ui-widget-content ui-corner-all" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label><br />
+                                    <input type="password" name="password" id="login-password" value="" class="text ui-widget-content ui-corner-all" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="login" class="btn btn-info">Login</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 <!-- build:js js/vendor.js -->
 <script src="../node_modules/jquery/dist/jquery.js"></script>

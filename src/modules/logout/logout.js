@@ -1,19 +1,17 @@
-/**
- * Created by pborrawar on 6/24/15.
- */
-(function($, checkin){
+"use strict";
+(function ($, checkin) {
 
     checkin.Logout = {
-        init: function(elem) {
+        init: function (elem) {
             this.$elem = $(elem);
             this.setup();
         },
-
-        setup: function() {
+        // Set Click event
+        setup: function () {
             this.$elem.click(checkin.Logout.logout);
         },
-
-        logout: function(event) {
+        // Log off user hide content and show Login Modal
+        logout: function (event) {
             event.preventDefault();
 
             firebaseRef.unauth();
@@ -23,9 +21,9 @@
 
     };
 
-    // Initialize Logout div
-    $( document ).ready(function() {
-        checkin.Logout.init('#logout');
+    // Initialize Logout div with DOM element when DOM is ready
+    $(function () {
+        checkin.Logout.init("#logout");
     });
 
-})(jQuery, CheckIn);
+}(jQuery, CheckIn));
