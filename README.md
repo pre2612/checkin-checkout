@@ -1,6 +1,6 @@
 # checkin-checkout
 
-sudo npm install
+npm install
 
 bower install 
 
